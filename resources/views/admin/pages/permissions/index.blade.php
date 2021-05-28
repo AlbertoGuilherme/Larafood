@@ -1,28 +1,28 @@
 @extends('adminlte::page')
-@section('title', 'Planos')
+@section('title', 'permission')
 
 @section('content_header')
 
 
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('admin.index')}}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{route('plans.index')}}">Planos</a></li>
+        <li class="breadcrumb-item"><a href="{{route('permissions.index')}}">perfil</a></li>
         <li class="breadcrumb-item active"></li>
     </ol>
 
-<h1>Planos <a href="{{route('plans.create')}}" class="btn btn-dark"><i class=" fas fa-plus-circle"></i></a></h1>
+<h1>perfil <a href="{{route('permissions.create')}}" class="btn btn-dark"><i class=" fas fa-plus-circle"></i></a></h1>
 @stop
 
 @section('content')
 
 <div class="card">
         <div class="card-header">
-
+                @include('admin.pages.permissions.alerts.errors')
             {{-- FILTRO --}}
-                <form action="{{route('plans.search')}}" method="post" class="form form-inline">
+                <form action="{{route('permissions.search')}}" method="post" class="form form-inline">
                     @csrf
                     <div class="group">
-                        <input type="text" name="filter" id="filter" placeholder="Filtrar" class="form-control" value="{{$filters['filter'] ?? ''}}">
+                        <input type="text" name="filter" id="filter" placeholder="Filtrar" class="form-control" value="{{$filter['filter'] ?? ''}}">
                     </div>
 
                         <button class="btn btn-dark">Pesquisar</button>
@@ -37,7 +37,7 @@
                             <thead>
 
                              <th>Name</th>
-                            <th>Price</th>
+
                             <th width="250px">Accoes</th>
 
 
@@ -45,16 +45,16 @@
                             </thead>
 
                         </tr>
-                        @foreach ($plans as $plan)
+                        @foreach ($permissions as $permission)
 
                         <tr>
 
-                             <td>{{ $plan->name }}</td>
-                            <td> {{ number_format($plan->price , 2 , ',', '.' ) }} <b>KZ</b> </td>
+                             <td>{{ $permission->name }}</td>
+
                             <td style="max-width: 10px">
-                                <a href="{{route('details.plan.index', $plan->url)}}"  class="btn btn-info">Detalhes</a>
-                                <a href="{{route('plans.show', $plan->url)}}"  class="btn btn-warning">Ver</a>
-                                <a href="{{route('plans.edit', $plan->url)}}"  class="btn btn-primary">Editar</a>
+                                {{-- <a href="{{route('details.permission.index', $permission->id)}}"  class="btn btn-info">Detalhes</a> --}}
+                                <a href="{{route('permissions.show', $permission->id)}}"  class="btn btn-warning">Ver</a>
+                                <a href="{{route('permissions.edit', $permission->id)}}"  class="btn btn-primary">Editar</a>
 
                             </td>
 
@@ -72,11 +72,11 @@
         <div class="card-footer ">
 
             <div  >
-                @if (isset($filters))
-                {!! $plans->appends($filters)->links() !!}
+                @if (isset($filter))
+                {!! $permissions->appends($filter)->links() !!}
 
                 @else
-                {!! $plans->links() !!}
+                {!! $permissions->links() !!}
                 @endif
 
             </div>

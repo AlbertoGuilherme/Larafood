@@ -8,7 +8,7 @@ class Plan extends Model
 {
     protected $fillable = ['name', 'url', 'price', 'description'];
 
-    public function detail()
+    public function details()
     {
         return $this->hasMany(DetailPlan::class);
     }

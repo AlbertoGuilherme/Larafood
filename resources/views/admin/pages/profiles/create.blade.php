@@ -1,0 +1,25 @@
+@extends('adminlte::page')
+@section('title', 'cadastrar novo Perfil')
+
+@section('content_header')
+<h1>Cadastrar Novo Perfil</h1>
+
+<div class="card">
+        <div class="card-body">
+                <form action="{{route('profiles.store')}}" method="post">
+                    @csrf
+                        @include('admin.pages.profiles._partials.form')
+                        <div class="form-group">
+                            <button type="submit"  class="btn btn-outline-dark">criar</button>
+                            </div>
+                    </form>
+
+                </div>
+          </div>
+@stop
+
+@section('content')
+
+
+
+@stop

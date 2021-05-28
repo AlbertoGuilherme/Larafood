@@ -20,6 +20,7 @@
     </tr>
 </thead>
 </table>
+@include('admin.pages.alerts.errors')
     <form action="{{route('plans.destroy',$plan->url)}}" method="POST">
     @csrf
     @method('DELETE')
