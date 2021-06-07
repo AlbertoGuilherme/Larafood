@@ -53,8 +53,9 @@
 
                             <td style="max-width: 10px">
                                 {{-- <a href="{{route('details.permission.index', $permission->id)}}"  class="btn btn-info">Detalhes</a> --}}
-                                <a href="{{route('permissions.show', $permission->id)}}"  class="btn btn-warning">Ver</a>
-                                <a href="{{route('permissions.edit', $permission->id)}}"  class="btn btn-primary">Editar</a>
+                                <a href="{{route('permissions.show', $permission->id)}}"  class="btn  btn-warning rounded-circle"> <i class="fa fa-eye"></i> </a>
+                                <a href="{{route('permissions.edit', $permission->id)}}"  class="btn  btn-primary rounded-circle"> <i class="fa fa-edit"></i> </a>
+                                <a href="{{route('permissions.profiles', $permission->id)}}"  class="btn  btn-info rounded-circle">  <i class="fa fa-book"></i> </a>
 
                             </td>
 

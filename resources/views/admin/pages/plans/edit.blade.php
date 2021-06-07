@@ -1,5 +1,6 @@
 @extends('adminlte::page')
 @section('title', 'Editar plano')
+<link rel="stylesheet" href="css/comum.css">
 
 @section('content_header')
 <h1>Editar plano {{$plan->name}}</h1>

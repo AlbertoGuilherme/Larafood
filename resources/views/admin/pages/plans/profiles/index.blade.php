@@ -1,16 +1,17 @@
 @extends('adminlte::page')
-@section('title', 'Permissões do perfil {$profile->name}')
+@section('title', 'Perfis disponiveis para  plano {{$plan->name}}')
 
 @section('content_header')
 
 
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('admin.index')}}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{route('profiles.index')}}">perfil</a></li>
-        <li class="breadcrumb-item active"></li>
+        <li class="breadcrumb-item"><a href="{{route('profiles.index')}}">plano</a></li>
+        <li class="breadcrumb-item "> <a href="{{route('plans.profiles', $plan->id)}}" >Planos</a></li>
+        <li class="breadcrumb-item active"> <a href="{{route('plans.profiles', $plan->id)}}" >desponiveis</a></li>
     </ol>
 
-<h1>Permissões do perfil {{$profile->name}} <a href="{{route('profiles.permission.available',$profile->id)}}" class="btn btn-dark"><i class=" fas fa-plus-circle"></i> ADD NOVA PERMISSAO</a></h1>
+<h1>Perfis disponiveis para  plano {{$plan->name}} <a href="{{route('plans.profiles.available',$plan->id)}}" class="btn btn-dark"><i class=" fas fa-plus-circle"></i> ADD NOVo perfil</a></h1>
 @stop
 
 @section('content')
@@ -45,15 +46,15 @@
                             </thead>
 
                         </tr>
-                        @foreach ($permissions as $permission)
+                        @foreach ($profiles as $profile)
 
                         <tr>
 
-                             <td>{{ $permission->name }}</td>
+                             <td>{{ $profile->name }}</td>
 
                             <td style="max-width: 10px">
                                 {{-- <a href="{{route('details.profile.index', $profile->id)}}"  class="btn btn-info">Detalhes</a> --}}
-                                <a href="{{route('profiles.permission.detach', [$profile->id, $permission->id])}}"  class="btn btn-danger"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
+                                <a href="{{route('plans.profiles.detach', [$plan->id, $profile->id])}}"  class="btn btn-danger"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
 
                             </td>
 
@@ -72,10 +73,10 @@
 
             <div  >
                 @if (isset($filter))
-                {!! $permissions->appends($filter)->links() !!}
+                {!! $profiles->appends($filter)->links() !!}
 
                 @else
-                {!! $permissions->links() !!}
+                {!! $profiles->links() !!}
                 @endif
 
             </div>

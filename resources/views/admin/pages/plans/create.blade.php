@@ -1,5 +1,7 @@
 @extends('adminlte::page')
+<link rel="stylesheet" href="css/comum.css">
 @section('title', 'cadastrar novo plano')
+
 
 @section('content_header')
 <h1>Cadastrar Novo Plano</h1>

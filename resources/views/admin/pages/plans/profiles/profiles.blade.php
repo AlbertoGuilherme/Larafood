@@ -1,25 +1,25 @@
 @extends('adminlte::page')
-@section('title', 'Profile')
+@section('title', "Perfis do  plano {$plan->name}" )
 
 @section('content_header')
 
 
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('admin.index')}}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{route('profiles.index')}}">perfil</a></li>
-        <li class="breadcrumb-item active"></li>
+        <li class="breadcrumb-item"><a href="{{route('plans.index')}}">perfil</a></li>
+        <li class="breadcrumb-item active"><a href="{{route('plans.profiles', $plan->id)}}" class="active">Planos</a></li>
     </ol>
-
-<h1>perfil <a href="{{route('profiles.create')}}" class="btn btn-dark"><i class=" fas fa-plus-circle"></i></a></h1>
+<h1>Perfis disponiveis para o  plano <strong>{{$plan->name}}</strong></h1>
+<a href="{{route('plans.profiles.available',$plan->id)}}" class="btn btn-dark">Add Perfil</a>
 @stop
 
 @section('content')
 
 <div class="card">
         <div class="card-header">
-                @include('admin.pages.profiles.alerts.errors')
+                @include('admin.pages.alerts.errors')
             {{-- FILTRO --}}
-                <form action="{{route('profiles.search')}}" method="post" class="form form-inline">
+                <form action="{{route('plans.profiles.available', $plan->id)}}" method="post" class="form form-inline">
                     @csrf
                     <div class="group">
                         <input type="text" name="filter" id="filter" placeholder="Filtrar" class="form-control" value="{{$filter['filter'] ?? ''}}">
@@ -35,40 +35,38 @@
                     <table class="table table-condensed">
                         <tr>
                             <thead>
-
+                                <th width = "50px">#</th>
                              <th>Name</th>
 
-                            <th width="270">Ações</th>
+
 
 
 
                             </thead>
 
                         </tr>
-                        @foreach ($profiles as $profile)
+                        <form action="{{route('plans.profiles.attach', [$plan->id])}}" method="post">
+                                @csrf
+                                @foreach ($profiles as $profile)
 
                         <tr>
-
+                            <td><input type="checkbox" name="profile[]" id="" value="{{$profile->id}}"></td>
                              <td>{{ $profile->name }}</td>
 
                             <td style="max-width: 10px">
-                                {{-- <a href="{{route('details.profile.index', $profile->id)}}"  class="btn btn-info">Detalhes</a> --}}
 
-                                <a href="{{route('profiles.show', $profile->id)}}"  class="btn btn-warning rounded-circle"> <i class="fa fa-eye"></i> </a>
-                                <a href="{{route('profiles.edit', $profile->id)}}"  class="btn btn-primary rounded-circle"> <i class="fa fa-edit"></i> </a>
-                                <a href="{{route('profiles.plans', $profile->id)}}"  class=" btn btn-info rounded-circle"><i class="fas fa-list-alt" ></i></a>
 
                             </td>
-
-
-
-
-
                         </tr>
 
-
-
                 @endforeach
+                <tr>
+                    <td colspan="500px">
+                        <button type="submit" class="btn btn-lg  btn-success">Vincular</button>
+                    </td>
+                </tr>
+
+                        </form>
             </table>
         </div>
         <div class="card-footer ">

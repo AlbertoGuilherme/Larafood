@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDetailPlansTable extends Migration
+class CreatePlanProfileTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,30 @@ class CreateDetailPlansTable extends Migration
      */
     public function up()
     {
-        Schema::create('details_plan', function (Blueprint $table) {
+        //Tive um problema nesse relacionamento , depois de trocar a ordem e criar as funcoes de rela funcionou
+        Schema::create('plan_profile', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('plan_id');
-            $table->string('name');
+            $table->unsignedBigInteger('profile_id');
+
+
             $table->timestamps();
+
 
             $table->foreign('plan_id')
                       ->references('id')
                       ->on('plans')
                       ->onDelete('cascade');
+
+            $table->foreign('profile_id')
+            ->references('id')
+            ->on('profiles')
+            ->onDelete('cascade');
+
+
+
+
+
         });
     }
 
@@ -33,6 +47,6 @@ class CreateDetailPlansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('details_plan');
+        Schema::dropIfExists('plan_profile');
     }
 }

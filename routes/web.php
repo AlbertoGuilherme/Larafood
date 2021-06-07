@@ -13,13 +13,26 @@
 
  Route::prefix('admin')
             ->namespace('Admin')
+            ->middleware('auth')
             ->group(function(){
+
+              /**
+                 * Routes Plans X Profile
+             */
+                Route::get('plans/{id}/profiles/{idProfiles}/detach', 'ACL\PlansProfilesController@detachPlanProfile')->name('plans.profiles.detach');
+                Route::post('plans/{id}/profile/attach', 'ACL\PlansProfilesController@attachPlanProfile')->name('plans.profiles.attach');
+                Route::any('plans/{id}/profile/create', 'ACL\PlansProfilesController@profilesAvailable')->name('plans.profiles.available');
+                Route::get('plans/{id}/profile', 'ACL\PlansProfilesController@profiles')->name('plans.profiles');
+                Route::get('profiles/{id}/plan', 'ACL\PlansProfilesController@plans')->name('profiles.plans');
 
                 /**
                  * Routes Profile X Permission
                  */
-
-                Route::get('pro/{$id}/permission', 'ACL\PermissionProfileController@permissions')->name('profiles.permission');
+                Route::get('pro/{id}/permission/{idPermission}/detach', 'ACL\PermissionProfileController@detachPermissionProfile')->name('profiles.permission.detach');
+                Route::post('pro/{id}/permission/attach', 'ACL\PermissionProfileController@attachPermissionProfile')->name('profiles.permission.attach');
+                Route::any('pro/{id}/permission/available', 'ACL\PermissionProfileController@permissionsAvailable')->name('profiles.permission.available');
+                Route::get('pro/{id}/permission', 'ACL\PermissionProfileController@permissions')->name('profiles.permission');
+                Route::get('permissions/{id}/profile', 'ACL\PermissionProfileController@profiles')->name('permissions.profiles');
 
                 /**
                  * Routes Permission
@@ -41,7 +54,6 @@
                 Route::delete('plans/{url}/details/{idPlan}', 'DetailController@destroy')->name('details.plan.destroy');
                 Route::get('plans/{url}/details/{idPlan}', 'DetailController@show')->name('details.plan.show');
                 Route::put('plans/{url}/details/{idPlan}/edit', 'DetailController@update')->name('details.plan.update');
-                Route::get('plans/{url}/details/create', 'DetailController@create')->name('details.plan.create');
                 Route::get('plans/{url}/details/{idPlan}/edit', 'DetailController@edit')->name('details.plan.edit');
                 Route::post('plans/{url}/details', 'DetailController@store')->name('details.plan.store');
 
@@ -62,6 +74,11 @@
                 Route::get('admin', 'PlansController@index')->name('admin.index');
 
             });
+
+            Auth::routes();
+
+Route::get('/', 'SiteController@index')->name('site.index');
+
 
 // Route::get('/product/{id}/edit', 'ProductController@edit')->name('product.update');
 // Route::get('/product/create', 'ProductController@create')->name('product.create');
@@ -164,6 +181,5 @@ tro da funcao anonima precisamos passar um valor ex $item = ' ' */
 // //     return view('site.contact');
 // // });
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+

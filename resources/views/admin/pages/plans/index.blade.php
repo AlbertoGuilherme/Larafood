@@ -1,5 +1,6 @@
 @extends('adminlte::page')
 @section('title', 'Planos')
+<link rel="stylesheet" href="css/comum.css">
 
 @section('content_header')
 
@@ -38,7 +39,7 @@
 
                              <th>Name</th>
                             <th>Price</th>
-                            <th width="250px">Accoes</th>
+                            <th width="270px">Accoes</th>
 
 
 
@@ -52,9 +53,10 @@
                              <td>{{ $plan->name }}</td>
                             <td> {{ number_format($plan->price , 2 , ',', '.' ) }} <b>KZ</b> </td>
                             <td style="max-width: 10px">
-                                <a href="{{route('details.plan.index', $plan->url)}}"  class="btn btn-info">Detalhes</a>
-                                <a href="{{route('plans.show', $plan->url)}}"  class="btn btn-warning">Ver</a>
-                                <a href="{{route('plans.edit', $plan->url)}}"  class="btn btn-primary">Editar</a>
+                                <a href="{{route('details.plan.index', $plan->url)}}"  class="btn btn-info rounded-circle"> <i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                                <a href="{{route('plans.show', $plan->url)}}"  class="btn btn-warning rounded-circle"> <i class="fa fa-eye" aria-hidden="true"></i></a>
+                                <a href="{{route('plans.edit', $plan->url)}}"  class="btn btn-primary rounded-circle"> <i class="fas fa-edit" aria-hidden="true"></i></a>
+                                <a href="{{route('plans.profiles', $plan->id)}}"  class="btn btn-warning"> <i class="fa fa-address-book" aria-hidden="true"></i> </a>
 
                             </td>
 

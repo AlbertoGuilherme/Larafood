@@ -1,5 +1,6 @@
+
 @extends('adminlte::page')
-@section('title', 'Permissões do perfil {$profile->name}')
+@section('title', 'Perfis da permissão {$permission->name}')
 
 @section('content_header')
 
@@ -10,7 +11,7 @@
         <li class="breadcrumb-item active"></li>
     </ol>
 
-<h1>Permissões do perfil {{$profile->name}} <a href="{{route('profiles.permission.available',$profile->id)}}" class="btn btn-dark"><i class=" fas fa-plus-circle"></i> ADD NOVA PERMISSAO</a></h1>
+<h1>Perfis da permissão {{$permission->name}} </h1>
 @stop
 
 @section('content')
@@ -18,16 +19,6 @@
 <div class="card">
         <div class="card-header">
                 @include('admin.pages.profiles.alerts.errors')
-            {{-- FILTRO --}}
-                <form action="{{route('profiles.search')}}" method="post" class="form form-inline">
-                    @csrf
-                    <div class="group">
-                        <input type="text" name="filter" id="filter" placeholder="Filtrar" class="form-control" value="{{$filter['filter'] ?? ''}}">
-                    </div>
-
-                        <button class="btn btn-dark">Pesquisar</button>
-                </form>
-        </div>
 
         <div class="card-body">
 
@@ -45,11 +36,11 @@
                             </thead>
 
                         </tr>
-                        @foreach ($permissions as $permission)
+                        @foreach ($profiles as $profile)
 
                         <tr>
 
-                             <td>{{ $permission->name }}</td>
+                             <td>{{ $profile->name }}</td>
 
                             <td style="max-width: 10px">
                                 {{-- <a href="{{route('details.profile.index', $profile->id)}}"  class="btn btn-info">Detalhes</a> --}}
@@ -72,10 +63,10 @@
 
             <div  >
                 @if (isset($filter))
-                {!! $permissions->appends($filter)->links() !!}
+                {!! $profiles->appends($filter)->links() !!}
 
                 @else
-                {!! $permissions->links() !!}
+                {!! $profiles->links() !!}
                 @endif
 
             </div>
@@ -84,3 +75,4 @@
 </div>
 
 @stop
+
