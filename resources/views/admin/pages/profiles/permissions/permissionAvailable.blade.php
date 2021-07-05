@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Permissões disponiveis para o  perfil {$profile->name}')
+@section('title', 'Permissões disponiveis para o  perfil {{$profile->name}}')
 
 @section('content_header')
 

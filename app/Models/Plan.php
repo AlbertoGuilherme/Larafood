@@ -18,6 +18,11 @@ class Plan extends Model
         return $this->belongsToMany(Profile::class, 'plan_profile');
     }
 
+    public function tenants()
+    {
+        return $this->hasMany(Tenant::class);
+    }
+
     public function search($filter)
     {
         $result = $this->where('name', 'LIKE', "%{$filter}%")

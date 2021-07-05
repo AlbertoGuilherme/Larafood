@@ -2,21 +2,27 @@
 
 namespace App;
 
+
+use App\Models\Tenant;
+use App\Models\Traits\UserACLTrait;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, UserACLTrait;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
+
+     // AQUI TIVE O PROBLEMA DE DIZER QUE N\AO EXISTE O DEFAULT VALOR PARA O TENANT_ID, SOLUCAO , ADICIONAR AO FILLABLE
     protected $fillable = [
-        'name', 'email', 'password',
+       'id' ,'name', 'email', 'password', 'tenant_id'
     ];
 
     /**
@@ -36,4 +42,21 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+     /**
+     * The attributes that should be cast to native types.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeTenantFilter( Builder $query)
+    {
+            return $query->where('tenant_id', auth()->user()->tenant_id);
+    }
+
+
+    public function tenant()
+    {
+        return $this->belongsTo(Tenant::class);
+    }
 }

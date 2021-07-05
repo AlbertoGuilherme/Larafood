@@ -57,7 +57,7 @@
                                 <a href="{{route('profiles.show', $profile->id)}}"  class="btn btn-warning rounded-circle"> <i class="fa fa-eye"></i> </a>
                                 <a href="{{route('profiles.edit', $profile->id)}}"  class="btn btn-primary rounded-circle"> <i class="fa fa-edit"></i> </a>
                                 <a href="{{route('profiles.plans', $profile->id)}}"  class=" btn btn-info rounded-circle"><i class="fas fa-list-alt" ></i></a>
-
+                                <a href="{{route('profiles.permission' , $profile->id )}}" class=" btn btn-warning "><i class="fas fa-lock" ></i></a>
                             </td>
 
 

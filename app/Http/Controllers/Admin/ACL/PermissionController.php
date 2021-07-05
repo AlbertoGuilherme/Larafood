@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Admin\ACL;
 
 use App\Http\Requests\StoreUpdatePermissionRequest;
@@ -8,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Permission;
 
 
-class permissionController extends Controller
+class PermissionController extends Controller
 {
         protected $repository ;
         public function __construct(Permission $permission)

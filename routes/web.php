@@ -13,8 +13,48 @@
 
  Route::prefix('admin')
             ->namespace('Admin')
-            ->middleware('auth')
             ->group(function(){
+
+                    Route::get('acl-test', function(){
+                    //   dd(auth()->user()->hasPermission('View_dinheiro'))  ;
+                   dd( auth()->user()->permission());
+                    });
+
+                     /**
+                 * Routes Table
+                 */
+                Route::resource('tables', 'TableController');
+                Route::any('tables/search', 'TableController@search')->name('tables.search');
+
+             /**
+                 * Routes Product X Category
+             */
+            Route::get('products/{id}/categories/{idCategories}/detach', 'ProductCategoryController@detachProductCategory')->name('products.categories.detach');
+            Route::post('products/{id}/category/attach', 'ProductCategoryController@attachProductCategory')->name('products.categories.attach');
+            Route::any('products/{id}/category/create', 'ProductCategoryController@categoriesAvailable')->name('products.categories.available');
+            Route::get('products/{id}/category', 'ProductCategoryController@categories')->name('products.categories');
+            Route::get('categories/{id}/product', 'ProductCategoryController@products')->name('categories.products');
+
+                      /**
+                 * Routes Product
+                 */
+                Route::resource('products', 'ProductController');
+                Route::any('products/search', 'ProductController@search')->name('products.search');
+
+
+                     /**
+                 * Routes Category
+                 */
+                Route::resource('categories', 'CategoryController');
+                Route::any('categories/search', 'CategoryController@search')->name('categories.search');
+
+                   /**
+                 * Routes Users
+                 */
+                Route::resource('users', 'UserController');
+                Route::any('users/search', 'UserController@search')->name('users.search');
+
+
 
               /**
                  * Routes Plans X Profile
@@ -77,7 +117,13 @@
 
             Auth::routes();
 
+            /**
+             * Site
+             */
+  Route::get('/subscription/{url}', 'SiteController@plan')->name('site.subscription');
 Route::get('/', 'SiteController@index')->name('site.index');
+
+
 
 
 // Route::get('/product/{id}/edit', 'ProductController@edit')->name('product.update');
