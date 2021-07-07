@@ -16,8 +16,8 @@
             ->group(function(){
 
                     Route::get('acl-test', function(){
-                    //   dd(auth()->user()->hasPermission('View_dinheiro'))  ;
-                   dd( auth()->user()->permission());
+                      dd(auth()->user()->permission());
+
                     });
 
                      /**
