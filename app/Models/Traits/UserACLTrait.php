@@ -12,13 +12,14 @@ namespace App\Models\Traits;
 
 
 
-            $permissions = [];
+           $permissions = [];
 
             foreach($plan->profiles as $profile) {
                 foreach($profile->permissions as $permission) {
                     array_push($permissions , $permission->name);
                 }
             }
+
             return $permissions;
         }
         public function hasPermission(string $permissionName) : bool

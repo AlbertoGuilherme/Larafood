@@ -13,6 +13,7 @@ class PlansProfilesController extends Controller
     {
             $this->plan = $plan;
             $this->profile = $profile;
+
     }
 
 

@@ -25,8 +25,15 @@
         </ul>
         <form class="form-inline my-2 my-lg-0">
 
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><a href="{{route('login')}}">Entrar</a></button>
-        </form>
+              @if (auth()->user())
+                <a name="" id="" class="btn btn-primary" href="#" role="button">{{$userName}}</a>
+
+              @else
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><a href="{{route('login')}}">Entrar</a></button>
+
+
+              @endif
+             </form>
     </div>
 </nav>
 @section('content')

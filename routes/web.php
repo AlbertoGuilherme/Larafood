@@ -15,10 +15,12 @@
             ->namespace('Admin')
             ->group(function(){
 
-                    Route::get('acl-test', function(){
-                      dd(auth()->user()->permission());
+                          /**
+                 * Routes Tenants
+                 */
+                Route::resource('tenants', 'TenantController');
+                Route::any('tenants/search', 'TenantController@search')->name('tenants.search');
 
-                    });
 
                      /**
                  * Routes Table

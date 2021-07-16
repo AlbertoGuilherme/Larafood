@@ -4,14 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Plan;
+use App\Models\User;
 
 class SiteController extends Controller
 {
     public function index()
     {
-                $plans = Plan::with('details')->orderBy('price', 'ASC')->get();
+        $userName = 0 ;
+            if(auth()->user())
+                $userName = auth()->user()->name;
 
-                return view('site.home.pages.planos', ['plans' => $plans]);
+           $plans = Plan::with('details')->orderBy('price', 'ASC')->get();
+
+                return view('site.home.pages.planos', ['plans' => $plans, 'userName' => $userName]);
     }
 
     public function plan($url)
